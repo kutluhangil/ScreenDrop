@@ -65,16 +65,14 @@ struct GeometryTests {
 
 @MainActor
 struct PreferencesTests {
-    @Test func savedValuesAreReadAndBadOnesFallBack() throws {
-        let defaults = try #require(UserDefaults(suiteName: "ScreenDropTests.\(UUID())"))
-        #expect(Preferences.load(from: defaults).intensity == 1)
-        defaults.set(1.5, forKey: Preferences.Key.intensity)
-        defaults.set(false, forKey: Preferences.Key.skipFullScreen)
-        #expect(Preferences.load(from: defaults).intensity == 1.5)
-        #expect(!Preferences.load(from: defaults).skipFullScreen)
-        defaults.set(9.0, forKey: Preferences.Key.intensity)       // aralık dışı
-        defaults.set("evet", forKey: Preferences.Key.enabled)      // yanlış tip
-        let p = Preferences.load(from: defaults)
+    @Test func savedValuesAreReadAndBadOnesFallBack() {
+        #expect(Preferences.load { _ in nil }.intensity == 1)
+        var saved: [String: Any] = [Preferences.Key.intensity: 1.5, Preferences.Key.skipFullScreen: false]
+        #expect(Preferences.load { saved[$0] }.intensity == 1.5)
+        #expect(!Preferences.load { saved[$0] }.skipFullScreen)
+        saved[Preferences.Key.intensity] = 9.0       // aralık dışı
+        saved[Preferences.Key.enabled] = "evet"      // yanlış tip
+        let p = Preferences.load { saved[$0] }
         #expect(p.intensity == 1 && p.enabled)
     }
 }

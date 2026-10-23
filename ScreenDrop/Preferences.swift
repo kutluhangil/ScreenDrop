@@ -37,13 +37,14 @@ struct Preferences {
     var debug = false
 
     /// Kayıtlı değerler; eksik, yanlış tipte ya da aralık dışı olanlar varsayılana döner.
-    static func load(from defaults: UserDefaults = .standard) -> Preferences {
+    /// `value` anahtarın kayıtlı değerini verir; testler diske yazmadan bir sözlük geçer.
+    static func load(_ value: (String) -> Any? = { UserDefaults.standard.object(forKey: $0) }) -> Preferences {
         var p = Preferences()
-        if let v = defaults.object(forKey: Key.enabled) as? Bool { p.enabled = v }
-        if let v = defaults.object(forKey: Key.intensity) as? Double, intensityRange.contains(v) { p.intensity = v }
-        if let v = defaults.object(forKey: Key.skipFullScreen) as? Bool { p.skipFullScreen = v }
-        if let v = defaults.object(forKey: Key.chromatic) as? Bool { p.chromatic = v }
-        if let v = defaults.object(forKey: Key.debug) as? Bool { p.debug = v }
+        if let v = value(Key.enabled) as? Bool { p.enabled = v }
+        if let v = value(Key.intensity) as? Double, intensityRange.contains(v) { p.intensity = v }
+        if let v = value(Key.skipFullScreen) as? Bool { p.skipFullScreen = v }
+        if let v = value(Key.chromatic) as? Bool { p.chromatic = v }
+        if let v = value(Key.debug) as? Bool { p.debug = v }
         return p
     }
 }
