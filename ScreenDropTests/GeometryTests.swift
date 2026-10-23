@@ -5,70 +5,61 @@ import Testing
 
 @MainActor
 struct GeometryTests {
-    // Kutluhan'ın düzeni: 3440×1440 ana ekran, altında sağa kaydırılmış 1920×1080 (Cocoa koordinatları).
+    // Quartz koordinatları. Kutluhan'ın düzeni: 3440×1440 ana ekran, altında sağa kaydırılmış 1920×1080.
     let stacked = [CGRect(x: 0, y: 0, width: 3440, height: 1440),
-                   CGRect(x: 1074, y: -1080, width: 1920, height: 1080)]
+                   CGRect(x: 1074, y: 1440, width: 1920, height: 1080)]
+    // Yan yana, sağdaki daha uzun ve yukarı kaydırılmış.
     let sideBySide = [CGRect(x: 0, y: 0, width: 1920, height: 1080),
-                      CGRect(x: 1920, y: -360, width: 2560, height: 1440)]
+                      CGRect(x: 1920, y: -200, width: 2560, height: 1440)]
 
-    @Test func approachingTheDisplayBelow() {
-        let a = approach(to: CGPoint(x: 2000, y: 100), frames: stacked, within: 160)
-        #expect(a == Approach(screen: 0, neighbor: 1, side: .bottom, distance: 100, edgePoint: CGPoint(x: 2000, y: 0)))
+    @Test func cocoaAndQuartzFlipBothWays() {
+        // Cocoa'da alttaki ekran (1074, -1080), Quartz'ta (1074, 1440).
+        let cocoa = CGRect(x: 1074, y: -1080, width: 1920, height: 1080)
+        #expect(Coordinates.flip(cocoa, primaryHeight: 1440) == stacked[1])
+        #expect(Coordinates.flip(stacked[1], primaryHeight: 1440) == cocoa)
+        #expect(Coordinates.flip(CGPoint(x: 10, y: 1440), primaryHeight: 1440) == CGPoint(x: 10, y: 0))
     }
 
-    @Test func noApproachWhereNoDisplayIsBeyondTheEdge() {
-        // Alt kenar ama alttaki ekranın dışında kalan kısım (x < 1074).
-        #expect(approach(to: CGPoint(x: 500, y: 50), frames: stacked, within: 160) == nil)
-        // Komşu kenara uzak.
-        #expect(approach(to: CGPoint(x: 2000, y: 700), frames: stacked, within: 160) == nil)
+    @Test func containmentIsHalfOpenSoTheSeamBelongsToOneDisplay() {
+        #expect(display(containing: CGPoint(x: 2000, y: 1439.5), frames: stacked) == 0)
+        #expect(display(containing: CGPoint(x: 2000, y: 1440), frames: stacked) == 1)
+        #expect(display(containing: CGPoint(x: 500, y: 1500), frames: stacked) == nil)
     }
 
-    @Test func approachingFromBelowAndSideways() {
-        let up = approach(to: CGPoint(x: 1500, y: -40), frames: stacked, within: 160)
-        #expect(up?.side == .top && up?.neighbor == 0 && up?.distance == 40)
-        let right = approach(to: CGPoint(x: 1850, y: 500), frames: sideBySide, within: 160)
-        #expect(right == Approach(screen: 0, neighbor: 1, side: .right, distance: 70, edgePoint: CGPoint(x: 1920, y: 500)))
+    @Test func seamsForStackedSideBySideAndCornerTouching() {
+        #expect(seam(between: 1, 0, frames: stacked) == Seam(a: 0, b: 1, axis: .horizontal, position: 1440, start: 1074, end: 2994))
+        #expect(seam(between: 0, 1, frames: sideBySide) == Seam(a: 0, b: 1, axis: .vertical, position: 1920, start: 0, end: 1080))
+        let corner = [CGRect(x: 0, y: 0, width: 100, height: 100), CGRect(x: 100, y: 100, width: 100, height: 100)]
+        #expect(seam(between: 0, 1, frames: corner) == nil)
+        #expect(seams(frames: stacked).first?.midpoint == CGPoint(x: 2034, y: 1440))
     }
 
-    @Test func crossingDownAndBackUp() {
-        let down = crossing(from: CGPoint(x: 2000, y: 3), to: CGPoint(x: 2004, y: -2), frames: stacked)
-        #expect(down == Crossing(from: 0, to: 1, side: .bottom, edgePoint: CGPoint(x: 2004, y: 0)))
-        let up = crossing(from: CGPoint(x: 1500, y: -3), to: CGPoint(x: 1500, y: 2), frames: stacked)
-        #expect(up == Crossing(from: 1, to: 0, side: .top, edgePoint: CGPoint(x: 1500, y: 0)))
+    @Test func crossingPointIsTheIntersectionClampedToTheSharedSegment() {
+        let vertical = Seam(a: 0, b: 1, axis: .vertical, position: 1920, start: 0, end: 1080)
+        #expect(crossingPoint(from: CGPoint(x: 1910, y: 500), to: CGPoint(x: 1930, y: 520), seam: vertical) == CGPoint(x: 1920, y: 510))
+        #expect(crossingPoint(from: CGPoint(x: 1915, y: 1075), to: CGPoint(x: 1925, y: 1095), seam: vertical) == CGPoint(x: 1920, y: 1080))
+        let horizontal = Seam(a: 0, b: 1, axis: .horizontal, position: 1440, start: 1074, end: 2994)
+        #expect(crossingPoint(from: CGPoint(x: 2000, y: 1430), to: CGPoint(x: 2010, y: 1450), seam: horizontal) == CGPoint(x: 2005, y: 1440))
     }
 
-    @Test func crossingSideways() {
-        let c = crossing(from: CGPoint(x: 1918, y: 20), to: CGPoint(x: 1921, y: 20), frames: sideBySide)
-        #expect(c == Crossing(from: 0, to: 1, side: .right, edgePoint: CGPoint(x: 1920, y: 20)))
+    @Test func aWarpFromFarAwayIsNotACrossing() {
+        let vertical = Seam(a: 0, b: 1, axis: .vertical, position: 1920, start: 0, end: 1080)
+        #expect(crossingPoint(from: CGPoint(x: 1800, y: 500), to: CGPoint(x: 1930, y: 500), seam: vertical) == nil)
     }
 
-    @Test func aWarpIsNotACrossing() {
-        #expect(crossing(from: CGPoint(x: 100, y: 100), to: CGPoint(x: 2000, y: -500), frames: stacked) == nil)
-        #expect(crossing(from: CGPoint(x: 100, y: 100), to: CGPoint(x: 140, y: 120), frames: stacked) == nil)
+    @Test func stripsHugTheSeamAndAreClippedToEachDisplay() {
+        let s = seam(between: 0, 1, frames: stacked)!
+        let (a, b) = strips(for: s, frames: stacked)
+        #expect(a == Strip(display: 0, rect: CGRect(x: 954, y: 1080, width: 2160, height: 360), seamEdge: .bottom))
+        #expect(b == Strip(display: 1, rect: CGRect(x: 1074, y: 1440, width: 1920, height: 360), seamEdge: .top))
+        let v = seam(between: 0, 1, frames: sideBySide)!
+        let (left, right) = strips(for: v, frames: sideBySide)
+        #expect(left == Strip(display: 0, rect: CGRect(x: 1560, y: 0, width: 360, height: 1080), seamEdge: .right))
+        #expect(right == Strip(display: 1, rect: CGRect(x: 1920, y: -120, width: 360, height: 1320), seamEdge: .left))
     }
 
-    @Test func inwardNormalsFaceIntoEachDisplay() {
-        // Ana ekranın alt kenarı: içeri yukarı doğru (yerel y azalır); alttaki ekranın üst kenarı: içeri aşağı.
-        #expect(Side.bottom.inward == CGVector(dx: 0, dy: -1))
-        #expect(Side.bottom.opposite.inward == CGVector(dx: 0, dy: 1))
-        #expect(localPoint(CGPoint(x: 2004, y: 0), in: stacked[1]) == CGPoint(x: 930, y: 0))
-        #expect(localPoint(CGPoint(x: 2004, y: 0), in: stacked[0]) == CGPoint(x: 2004, y: 1440))
-    }
-
-    @Test func chargeFollowsThenFadesWhenThePointerStops() {
-        let start = Date(timeIntervalSinceReferenceDate: 0)
-        var charge = Charge()
-        charge.set(1, at: start)
-        #expect(charge.value(at: start) == 0)
-        #expect(charge.value(at: start.addingTimeInterval(0.1)) > 0.7)
-        // Yeni olay gelmezse söner.
-        #expect(charge.value(at: start.addingTimeInterval(0.8)) < 0.05)
-        // Olaylar sık geldikçe (gerçekte 60-120 Hz) tam kalır.
-        var steady = Charge()
-        for step in 0...20 {
-            steady.set(1, at: start.addingTimeInterval(Double(step) * 0.016))
-        }
-        #expect(steady.value(at: start.addingTimeInterval(0.33)) > 0.9)
+    @Test func uniformLayoutMatchesTheShader() {
+        #expect(MemoryLayout<RippleUniforms>.size == 72)
     }
 }
 
@@ -76,24 +67,14 @@ struct GeometryTests {
 struct PreferencesTests {
     @Test func savedValuesAreReadAndBadOnesFallBack() throws {
         let defaults = try #require(UserDefaults(suiteName: "ScreenDropTests.\(UUID())"))
-        #expect(Preferences.load(from: defaults).style == .airDrop)
-        defaults.set("nameDrop", forKey: Preferences.Key.style)
-        defaults.set(1.3, forKey: Preferences.Key.brightness)
-        defaults.set(9.0, forKey: Preferences.Key.speed)        // aralık dışı
-        defaults.set("çok", forKey: Preferences.Key.zone)       // yanlış tip
-        defaults.set(false, forKey: Preferences.Key.gather)
+        #expect(Preferences.load(from: defaults).intensity == 1)
+        defaults.set(1.5, forKey: Preferences.Key.intensity)
+        defaults.set(false, forKey: Preferences.Key.skipFullScreen)
+        #expect(Preferences.load(from: defaults).intensity == 1.5)
+        #expect(!Preferences.load(from: defaults).skipFullScreen)
+        defaults.set(9.0, forKey: Preferences.Key.intensity)       // aralık dışı
+        defaults.set("evet", forKey: Preferences.Key.enabled)      // yanlış tip
         let p = Preferences.load(from: defaults)
-        #expect(p.style == .nameDrop && p.brightness == 1.3 && p.speed == 1.0 && p.zone == 160 && !p.gather)
-    }
-
-    @Test func speedScalesTheEffectTimeline() {
-        let model = DropModel()
-        let start = Date(timeIntervalSinceReferenceDate: 0)
-        model.burstAt = start
-        model.speed = 2
-        #expect(model.burst(at: start.addingTimeInterval(0.25)) == 0.5)
-        model.style = .airDrop
-        #expect(model.isActive(at: start.addingTimeInterval(0.4)))
-        #expect(!model.isActive(at: start.addingTimeInterval(0.5)))
+        #expect(p.intensity == 1 && p.enabled)
     }
 }

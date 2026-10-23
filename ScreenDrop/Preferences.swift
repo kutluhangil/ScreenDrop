@@ -1,71 +1,49 @@
 import Foundation
 
-enum EffectStyle: String, CaseIterable, Identifiable {
-    case airDrop, nameDrop
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .airDrop: "AirDrop"
-        case .nameDrop: "NameDrop"
-        }
-    }
-
-    var detail: String {
-        switch self {
-        case .airDrop: "Parlak ışık diski ve yanardöner halka"
-        case .nameDrop: "Kenarsız ışık, ekrana yayılan su dalgası"
-        }
-    }
-
-    var symbol: String {
-        switch self {
-        case .airDrop: "circle.circle"
-        case .nameDrop: "water.waves"
-        }
-    }
-
-    /// Shader'da efektin bittiği an, hız 1'de (saniye).
-    var duration: Double {
-        switch self {
-        case .airDrop: 0.95
-        case .nameDrop: 1.4
-        }
-    }
+/// Efektin ayarlanabilir sabitleri (seam-ripple-prompt.md, Faz 4). Yoğunluk ayarı genliği ölçekler.
+enum Tuning {
+    static let amplitude: Float = 14        // pt, tam yoğunlukta
+    static let speed: Float = 1400          // pt/sn, dalga cephesinin hızı
+    static let width: Float = 70            // pt, cephe zarfının genişliği
+    static let wavelength: Float = 90       // pt
+    static let tau: Float = 0.25            // sn, sönüm süresi
+    /// Belgedeki "yaklaşık 700 ms" süresi. exp(-t/τ) bu anda ~0,06'dır; shader son 30% içinde tam sıfıra indirir.
+    static let duration: Double = 0.7
+    static let stripDepth: CGFloat = 360    // pt, ek yerinin her iki yanında
+    static let stripMargin: CGFloat = 120   // pt, ortak parçanın uçlarından taşma
+    static let maxApproach: CGFloat = 40    // pt, bundan uzaktan gelen geçiş sıçrama sayılır
+    static let cooldown: Double = 0.45      // sn
+    /// Hareketi Azalt açıkken genlik çarpanı.
+    static let reducedMotion: Float = 0.3
 }
 
-/// Ayarlar; görünümler aynı anahtarları @AppStorage ile okur ve yazar.
+/// Ayarlar; ayarlar penceresi ve menü aynı anahtarları okur ve yazar.
 struct Preferences {
     enum Key {
         static let enabled = "enabled"
-        static let style = "style"
-        static let brightness = "brightness"
-        static let speed = "speed"
-        static let gather = "gather"
-        static let zone = "zone"
+        static let intensity = "intensity"
+        static let skipFullScreen = "skipFullScreen"
+        static let chromatic = "chromatic"
+        /// Gizli: `defaults write com.kutluhangil.ScreenDrop debug -bool true`
+        static let debug = "debug"
     }
 
-    static let brightnessRange = 0.5...1.6
-    static let speedRange = 0.6...1.6
-    static let zoneRange = 80.0...320.0
+    static let intensityRange = 0.2...2.0
 
     var enabled = true
-    var style = EffectStyle.airDrop
-    var brightness = 1.0
-    var speed = 1.0
-    var gather = true
-    var zone = 160.0
+    var intensity = 1.0
+    var skipFullScreen = true
+    var chromatic = false
+    var debug = false
 
-    /// Kayıtlı değerler; eksik ya da aralık dışı olanlar varsayılana döner.
+    /// Kayıtlı değerler; eksik, yanlış tipte ya da aralık dışı olanlar varsayılana döner.
     static func load(from defaults: UserDefaults = .standard) -> Preferences {
         var p = Preferences()
         if let v = defaults.object(forKey: Key.enabled) as? Bool { p.enabled = v }
-        if let v = defaults.string(forKey: Key.style).flatMap(EffectStyle.init(rawValue:)) { p.style = v }
-        if let v = defaults.object(forKey: Key.brightness) as? Double, brightnessRange.contains(v) { p.brightness = v }
-        if let v = defaults.object(forKey: Key.speed) as? Double, speedRange.contains(v) { p.speed = v }
-        if let v = defaults.object(forKey: Key.gather) as? Bool { p.gather = v }
-        if let v = defaults.object(forKey: Key.zone) as? Double, zoneRange.contains(v) { p.zone = v }
+        if let v = defaults.object(forKey: Key.intensity) as? Double, intensityRange.contains(v) { p.intensity = v }
+        if let v = defaults.object(forKey: Key.skipFullScreen) as? Bool { p.skipFullScreen = v }
+        if let v = defaults.object(forKey: Key.chromatic) as? Bool { p.chromatic = v }
+        if let v = defaults.object(forKey: Key.debug) as? Bool { p.debug = v }
         return p
     }
 }

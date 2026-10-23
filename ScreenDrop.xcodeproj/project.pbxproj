@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A292D1798E5F27EC4E4E07A /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B68CCA6047FE7ED08A133A /* Overlay.swift */; };
+		068474EFDAC4202D056084D1 /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A343D0BE26AD0C2F9F79C89 /* Tracker.swift */; };
 		48AF1A9D325B9CF54B84886E /* Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6760946F21579E1C41F9988D /* Capture.swift */; };
-		5A0F44F793EF86EE43659174 /* RenderFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C17AFD3316E15CCAB9795 /* RenderFrames.swift */; };
+		4D67BE705CA902BFD240CDFF /* ReadmeMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF7B103505C89878F0694 /* ReadmeMedia.swift */; };
 		68F18A40BDE765EB4047AD0C /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAF496CC312115AD8412481 /* Geometry.swift */; };
 		6E37996D43E3035F3BFFC150 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688D2F3B02F7194DF94A4603 /* GeometryTests.swift */; };
-		72298336B947E7FB89A22BCD /* NameDrop.metal in Sources */ = {isa = PBXBuildFile; fileRef = A5947F2510BBA797CC9CE217 /* NameDrop.metal */; };
-		92474D56D9C33B5B70E226C3 /* DropFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B338F1A006B6F4DE9844F75 /* DropFrame.swift */; };
+		773812BE74EDB07157CB45BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A875E879FECC23081C7063 /* AppDelegate.swift */; };
+		7E7E1C0C64C4AFA348ACD1DD /* StripWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA0F13357609E1F02ACD83 /* StripWindow.swift */; };
+		8570AC268BAC78895F3AFABC /* Ripple.metal in Sources */ = {isa = PBXBuildFile; fileRef = CA4C8465FDC70F88B6C27979 /* Ripple.metal */; };
 		993115668F195A81995B3096 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0B5DB7C56DAAF6DDADAA64 /* SettingsView.swift */; };
 		9F9A4F44871AB42A9E1473E2 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A65A7B0975EEDAA8834F46 /* Preferences.swift */; };
-		BE6C4437F250D8935BEA5C11 /* ScreenDropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C35A300E121792071312CBA /* ScreenDropApp.swift */; };
-		C0439EA12AEDC523AD72DEC7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0BD4CCC2D748474EC8DFDA /* Coordinator.swift */; };
+		C6E30AEBB309C5BDF1C1F762 /* RippleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5672F8ABE88E3A84453F3ECB /* RippleTests.swift */; };
+		E5B960576A59901CAE2D39D0 /* EffectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFA56AFF95F029B459D5AF4 /* EffectController.swift */; };
+		EE15BB1F8E46994523B59BC7 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D839A93513B813F124AD63 /* Renderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,19 +33,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E0BD4CCC2D748474EC8DFDA /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		3B338F1A006B6F4DE9844F75 /* DropFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropFrame.swift; sourceTree = "<group>"; };
+		22A875E879FECC23081C7063 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		36CA0F13357609E1F02ACD83 /* StripWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripWindow.swift; sourceTree = "<group>"; };
 		505BB2BE044561BAEE026666 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5672F8ABE88E3A84453F3ECB /* RippleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleTests.swift; sourceTree = "<group>"; };
 		5B3902D36B4134AE054AF13F /* ScreenDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScreenDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		64B68CCA6047FE7ED08A133A /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
+		66D839A93513B813F124AD63 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		6760946F21579E1C41F9988D /* Capture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capture.swift; sourceTree = "<group>"; };
 		688D2F3B02F7194DF94A4603 /* GeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
 		6A0B5DB7C56DAAF6DDADAA64 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6CAF496CC312115AD8412481 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
-		8C3C17AFD3316E15CCAB9795 /* RenderFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderFrames.swift; sourceTree = "<group>"; };
-		9C35A300E121792071312CBA /* ScreenDropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDropApp.swift; sourceTree = "<group>"; };
-		A5947F2510BBA797CC9CE217 /* NameDrop.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = NameDrop.metal; sourceTree = "<group>"; };
+		759BF7B103505C89878F0694 /* ReadmeMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeMedia.swift; sourceTree = "<group>"; };
+		9A343D0BE26AD0C2F9F79C89 /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		B9A65A7B0975EEDAA8834F46 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		BCFA56AFF95F029B459D5AF4 /* EffectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectController.swift; sourceTree = "<group>"; };
+		CA4C8465FDC70F88B6C27979 /* Ripple.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Ripple.metal; sourceTree = "<group>"; };
 		D5BAC3C80D64E309CB0E6F11 /* ScreenDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -52,7 +56,8 @@
 			isa = PBXGroup;
 			children = (
 				688D2F3B02F7194DF94A4603 /* GeometryTests.swift */,
-				8C3C17AFD3316E15CCAB9795 /* RenderFrames.swift */,
+				759BF7B103505C89878F0694 /* ReadmeMedia.swift */,
+				5672F8ABE88E3A84453F3ECB /* RippleTests.swift */,
 			);
 			path = ScreenDropTests;
 			sourceTree = "<group>";
@@ -60,16 +65,17 @@
 		44F8DF1E7A50D3511120F0BD /* ScreenDrop */ = {
 			isa = PBXGroup;
 			children = (
+				22A875E879FECC23081C7063 /* AppDelegate.swift */,
 				6760946F21579E1C41F9988D /* Capture.swift */,
-				2E0BD4CCC2D748474EC8DFDA /* Coordinator.swift */,
-				3B338F1A006B6F4DE9844F75 /* DropFrame.swift */,
+				BCFA56AFF95F029B459D5AF4 /* EffectController.swift */,
 				6CAF496CC312115AD8412481 /* Geometry.swift */,
 				505BB2BE044561BAEE026666 /* Info.plist */,
-				A5947F2510BBA797CC9CE217 /* NameDrop.metal */,
-				64B68CCA6047FE7ED08A133A /* Overlay.swift */,
 				B9A65A7B0975EEDAA8834F46 /* Preferences.swift */,
-				9C35A300E121792071312CBA /* ScreenDropApp.swift */,
+				66D839A93513B813F124AD63 /* Renderer.swift */,
+				CA4C8465FDC70F88B6C27979 /* Ripple.metal */,
 				6A0B5DB7C56DAAF6DDADAA64 /* SettingsView.swift */,
+				36CA0F13357609E1F02ACD83 /* StripWindow.swift */,
+				9A343D0BE26AD0C2F9F79C89 /* Tracker.swift */,
 			);
 			path = ScreenDrop;
 			sourceTree = "<group>";
@@ -169,15 +175,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				773812BE74EDB07157CB45BF /* AppDelegate.swift in Sources */,
 				48AF1A9D325B9CF54B84886E /* Capture.swift in Sources */,
-				C0439EA12AEDC523AD72DEC7 /* Coordinator.swift in Sources */,
-				92474D56D9C33B5B70E226C3 /* DropFrame.swift in Sources */,
+				E5B960576A59901CAE2D39D0 /* EffectController.swift in Sources */,
 				68F18A40BDE765EB4047AD0C /* Geometry.swift in Sources */,
-				72298336B947E7FB89A22BCD /* NameDrop.metal in Sources */,
-				1A292D1798E5F27EC4E4E07A /* Overlay.swift in Sources */,
 				9F9A4F44871AB42A9E1473E2 /* Preferences.swift in Sources */,
-				BE6C4437F250D8935BEA5C11 /* ScreenDropApp.swift in Sources */,
+				EE15BB1F8E46994523B59BC7 /* Renderer.swift in Sources */,
+				8570AC268BAC78895F3AFABC /* Ripple.metal in Sources */,
 				993115668F195A81995B3096 /* SettingsView.swift in Sources */,
+				7E7E1C0C64C4AFA348ACD1DD /* StripWindow.swift in Sources */,
+				068474EFDAC4202D056084D1 /* Tracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +193,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E37996D43E3035F3BFFC150 /* GeometryTests.swift in Sources */,
-				5A0F44F793EF86EE43659174 /* RenderFrames.swift in Sources */,
+				4D67BE705CA902BFD240CDFF /* ReadmeMedia.swift in Sources */,
+				C6E30AEBB309C5BDF1C1F762 /* RippleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,8 +261,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 0.3.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.4.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -313,7 +321,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kutluhangil.ScreenDrop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kutluhangil.ScreenDrop.debug;
 				SDKROOT = macosx;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -386,8 +394,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 0.3.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.4.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

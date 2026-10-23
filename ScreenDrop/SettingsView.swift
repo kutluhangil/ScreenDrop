@@ -2,38 +2,31 @@ import ServiceManagement
 import SwiftUI
 
 struct SettingsView: View {
-    let preview: () -> Void
+    let test: () -> Void
+    let hasSeam: () -> Bool
 
     @AppStorage(Preferences.Key.enabled) private var enabled = Preferences().enabled
-    @AppStorage(Preferences.Key.style) private var style = Preferences().style
-    @AppStorage(Preferences.Key.brightness) private var brightness = Preferences().brightness
-    @AppStorage(Preferences.Key.speed) private var speed = Preferences().speed
-    @AppStorage(Preferences.Key.gather) private var gather = Preferences().gather
-    @AppStorage(Preferences.Key.zone) private var zone = Preferences().zone
+    @AppStorage(Preferences.Key.intensity) private var intensity = Preferences().intensity
+    @AppStorage(Preferences.Key.skipFullScreen) private var skipFullScreen = Preferences().skipFullScreen
+    @AppStorage(Preferences.Key.chromatic) private var chromatic = Preferences().chromatic
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
 
     var body: some View {
         VStack(spacing: 18) {
             header
             Card(title: "Efekt") {
-                HStack(spacing: 10) {
-                    ForEach(EffectStyle.allCases) { option in
-                        StyleTile(style: option, selected: style == option) { style = option }
-                    }
-                }
-                SliderRow(title: "Parlaklık", symbol: "sun.max", value: $brightness,
-                          range: Preferences.brightnessRange, label: "\(Int(brightness * 100))%")
-                SliderRow(title: "Hız", symbol: "gauge.with.dots.needle.67percent", value: $speed,
-                          range: Preferences.speedRange, label: String(format: "%.1f×", speed))
+                SliderRow(title: "Yoğunluk", symbol: "water.waves", value: $intensity,
+                          range: Preferences.intensityRange, label: "\(Int((intensity * 100).rounded()))%")
+                ToggleRow(title: "Renk kayması", detail: "Dalganın kenarında çok hafif renk ayrışması",
+                          symbol: "circle.lefthalf.filled", isOn: $chromatic)
             }
             Card(title: "Davranış") {
-                ToggleRow(title: "Yaklaşırken ışık toplansın",
-                          detail: "İmleç kenara doğru giderken bulanıklık ve ışık birikir",
-                          symbol: "dot.radiowaves.left.and.right", isOn: $gather)
-                SliderRow(title: "Yaklaşma mesafesi", symbol: "arrow.left.and.right", value: $zone,
-                          range: Preferences.zoneRange, label: "\(Int(zone)) pt")
-                    .disabled(!gather)
-                    .opacity(gather ? 1 : 0.4)
+                ToggleRow(title: "Tam ekranda oynatma", detail: "Öndeki uygulama bir ekranı kaplıyorsa (oyun, video) efekt yok",
+                          symbol: "arrow.up.left.and.arrow.down.right", isOn: $skipFullScreen)
+                InfoRow(title: "Hareketi Azalt", symbol: "figure.walk.motion",
+                        detail: NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
+                            ? "Açık: dalga çok daha hafif oynar"
+                            : "Kapalı: sistem ayarı açılırsa dalga hafifler")
             }
             Card(title: "Sistem") {
                 PermissionRow()
@@ -50,9 +43,10 @@ struct SettingsView: View {
             }
             footer
         }
-        .padding(22)
+        .padding(.horizontal, 22)
+        .padding(.top, 30)
+        .padding(.bottom, 22)
         .frame(width: 460)
-        .background(.background)
     }
 
     private var header: some View {
@@ -67,9 +61,10 @@ struct SettingsView: View {
             }
             .frame(width: 46, height: 46)
             .shadow(color: Color(red: 0.6, green: 0.55, blue: 1).opacity(0.45), radius: 10, y: 4)
+            .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
                 Text("ScreenDrop").font(.system(size: 20, weight: .semibold, design: .rounded))
-                Text("Monitörler arasında NameDrop efekti")
+                Text("Monitörler arasında su gibi bir geçiş")
                     .font(.system(size: 12))
                     .foregroundStyle(.secondary)
             }
@@ -87,15 +82,16 @@ struct SettingsView: View {
                 .font(.system(size: 11))
                 .foregroundStyle(.tertiary)
             Spacer()
-            Button(action: preview) {
-                Label("Önizle", systemImage: "sparkles")
+            Button(action: test) {
+                Label("Efekti test et", systemImage: "sparkles")
                     .font(.system(size: 13, weight: .medium))
                     .padding(.horizontal, 14)
                     .padding(.vertical, 6)
             }
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
-            .disabled(!enabled)
+            .disabled(!hasSeam())
+            .help(hasSeam() ? "İlk ek yerinin ortasında efekti oynatır" : "İki komşu ekran gerekiyor")
         }
     }
 }
@@ -116,36 +112,6 @@ private struct Card<Content: View>: View {
                 .background(.quaternary.opacity(0.35), in: .rect(cornerRadius: 14, style: .continuous))
                 .overlay(RoundedRectangle(cornerRadius: 14, style: .continuous).strokeBorder(.quaternary, lineWidth: 0.5))
         }
-    }
-}
-
-private struct StyleTile: View {
-    let style: EffectStyle
-    let selected: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            VStack(alignment: .leading, spacing: 8) {
-                Image(systemName: style.symbol)
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundStyle(selected ? Color.accentColor : .secondary)
-                Text(style.title).font(.system(size: 13, weight: .semibold))
-                Text(style.detail)
-                    .font(.system(size: 11))
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(12)
-            .background(selected ? Color.accentColor.opacity(0.1) : Color.clear,
-                        in: .rect(cornerRadius: 11, style: .continuous))
-            .overlay(RoundedRectangle(cornerRadius: 11, style: .continuous)
-                .strokeBorder(selected ? Color.accentColor : Color.secondary.opacity(0.25), lineWidth: selected ? 1.5 : 0.5))
-            .contentShape(.rect)
-        }
-        .buttonStyle(.plain)
-        .accessibilityAddTraits(selected ? .isSelected : [])
     }
 }
 
@@ -179,10 +145,11 @@ private struct ToggleRow: View {
     @Binding var isOn: Bool
 
     var body: some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(spacing: 10) {
             Image(systemName: symbol)
                 .frame(width: 18)
                 .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
                 Text(title).font(.system(size: 13))
                 Text(detail).font(.system(size: 11)).foregroundStyle(.secondary)
@@ -196,35 +163,66 @@ private struct ToggleRow: View {
     }
 }
 
-/// İzin durumu sistem ayarlarından değişebilir; birkaç saniyede bir yeniden okunur.
+private struct InfoRow: View {
+    let title: String
+    let symbol: String
+    let detail: String
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: symbol)
+                .frame(width: 18)
+                .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.system(size: 13))
+                Text(detail).font(.system(size: 11)).foregroundStyle(.secondary)
+            }
+            Spacer()
+        }
+    }
+}
+
+/// Efekt ekrandaki görüntüyü büktüğü için Ekran Kaydı izni şart. Durum birkaç saniyede bir yeniden okunur.
 private struct PermissionRow: View {
     var body: some View {
         TimelineView(.periodic(from: .now, by: 2)) { _ in
             let granted = CGPreflightScreenCaptureAccess()
-            HStack(spacing: 10) {
-                Image(systemName: "rectangle.dashed.badge.record")
-                    .frame(width: 18)
-                    .foregroundStyle(.secondary)
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 6) {
-                        Text("Ekran Kaydı").font(.system(size: 13))
-                        Circle()
-                            .fill(granted ? Color.green : Color.orange)
-                            .frame(width: 7, height: 7)
-                            .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(spacing: 10) {
+                    Image(systemName: "rectangle.dashed.badge.record")
+                        .frame(width: 18)
+                        .foregroundStyle(.secondary)
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack(spacing: 6) {
+                            Text("Ekran Kaydı").font(.system(size: 13))
+                            Circle()
+                                .fill(granted ? Color.green : Color.orange)
+                                .frame(width: 7, height: 7)
+                                .accessibilityHidden(true)
+                        }
+                        Text(granted ? "İzin var" : "İzin yok: efekt oynamaz")
+                            .font(.system(size: 11))
+                            .foregroundStyle(.secondary)
                     }
-                    Text(granted ? "Bulanıklık ve dalga açık" : "İzin yok: yalnızca ışık oynar")
+                    Spacer()
+                    if !granted {
+                        Button("İzin ver") {
+                            if !CGRequestScreenCaptureAccess() {
+                                NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture")!)
+                            }
+                        }
+                        .controlSize(.small)
+                    }
+                }
+                if !granted {
+                    Text("Dalga, ek yerinin iki yanındaki görüntünün kendisini büker; bunun için geçiş anında o şeridin anlık görüntüsü alınır. Görüntü yalnızca bellekte kullanılır, kaydedilmez ve Mac'ten çıkmaz. İzni verdikten sonra ScreenDrop'u yeniden başlat.")
                         .font(.system(size: 11))
                         .foregroundStyle(.secondary)
-                }
-                Spacer()
-                if !granted {
-                    Button("İzin ver") {
-                        if !CGRequestScreenCaptureAccess() {
-                            NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture")!)
-                        }
-                    }
-                    .controlSize(.small)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(10)
+                        .background(Color.orange.opacity(0.08), in: .rect(cornerRadius: 9, style: .continuous))
                 }
             }
         }
