@@ -1,0 +1,50 @@
+name: ScreenDrop
+options:
+  bundleIdPrefix: com.kutluhangil
+  deploymentTarget:
+    macOS: "15.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "0.3.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  ScreenDrop:
+    type: application
+    platform: macOS
+    sources: [ScreenDrop]
+    info:
+      path: ScreenDrop/Info.plist
+      properties:
+        LSUIElement: true
+        CFBundleDisplayName: ScreenDrop
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        NSHumanReadableCopyright: "© 2026 Kutluhan Gül"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.kutluhangil.ScreenDrop
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        SWIFT_APPROACHABLE_CONCURRENCY: true
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: "-"
+        ENABLE_HARDENED_RUNTIME: true
+  ScreenDropTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [ScreenDropTests]
+    dependencies:
+      - target: ScreenDrop
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        BUNDLE_LOADER: "$(TEST_HOST)"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/ScreenDrop.app/Contents/MacOS/ScreenDrop"
+schemes:
+  ScreenDrop:
+    build:
+      targets:
+        ScreenDrop: all
+        ScreenDropTests: [test]
+    test:
+      targets: [ScreenDropTests]

@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A292D1798E5F27EC4E4E07A /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B68CCA6047FE7ED08A133A /* Overlay.swift */; };
+		48AF1A9D325B9CF54B84886E /* Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6760946F21579E1C41F9988D /* Capture.swift */; };
+		5A0F44F793EF86EE43659174 /* RenderFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C17AFD3316E15CCAB9795 /* RenderFrames.swift */; };
+		68F18A40BDE765EB4047AD0C /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAF496CC312115AD8412481 /* Geometry.swift */; };
+		6E37996D43E3035F3BFFC150 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688D2F3B02F7194DF94A4603 /* GeometryTests.swift */; };
+		72298336B947E7FB89A22BCD /* NameDrop.metal in Sources */ = {isa = PBXBuildFile; fileRef = A5947F2510BBA797CC9CE217 /* NameDrop.metal */; };
+		92474D56D9C33B5B70E226C3 /* DropFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B338F1A006B6F4DE9844F75 /* DropFrame.swift */; };
+		993115668F195A81995B3096 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0B5DB7C56DAAF6DDADAA64 /* SettingsView.swift */; };
+		9F9A4F44871AB42A9E1473E2 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A65A7B0975EEDAA8834F46 /* Preferences.swift */; };
+		BE6C4437F250D8935BEA5C11 /* ScreenDropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C35A300E121792071312CBA /* ScreenDropApp.swift */; };
+		C0439EA12AEDC523AD72DEC7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0BD4CCC2D748474EC8DFDA /* Coordinator.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B193B7C369C67D25249C0D88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C846C713AF85DE4D868E416 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DB0C033287A0A7940512318;
+			remoteInfo = ScreenDrop;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2E0BD4CCC2D748474EC8DFDA /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		3B338F1A006B6F4DE9844F75 /* DropFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropFrame.swift; sourceTree = "<group>"; };
+		505BB2BE044561BAEE026666 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5B3902D36B4134AE054AF13F /* ScreenDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScreenDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		64B68CCA6047FE7ED08A133A /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
+		6760946F21579E1C41F9988D /* Capture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capture.swift; sourceTree = "<group>"; };
+		688D2F3B02F7194DF94A4603 /* GeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
+		6A0B5DB7C56DAAF6DDADAA64 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		6CAF496CC312115AD8412481 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		8C3C17AFD3316E15CCAB9795 /* RenderFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderFrames.swift; sourceTree = "<group>"; };
+		9C35A300E121792071312CBA /* ScreenDropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDropApp.swift; sourceTree = "<group>"; };
+		A5947F2510BBA797CC9CE217 /* NameDrop.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = NameDrop.metal; sourceTree = "<group>"; };
+		B9A65A7B0975EEDAA8834F46 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		D5BAC3C80D64E309CB0E6F11 /* ScreenDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		144B6CD2D9C02CE4D131960D /* ScreenDropTests */ = {
+			isa = PBXGroup;
+			children = (
+				688D2F3B02F7194DF94A4603 /* GeometryTests.swift */,
+				8C3C17AFD3316E15CCAB9795 /* RenderFrames.swift */,
+			);
+			path = ScreenDropTests;
+			sourceTree = "<group>";
+		};
+		44F8DF1E7A50D3511120F0BD /* ScreenDrop */ = {
+			isa = PBXGroup;
+			children = (
+				6760946F21579E1C41F9988D /* Capture.swift */,
+				2E0BD4CCC2D748474EC8DFDA /* Coordinator.swift */,
+				3B338F1A006B6F4DE9844F75 /* DropFrame.swift */,
+				6CAF496CC312115AD8412481 /* Geometry.swift */,
+				505BB2BE044561BAEE026666 /* Info.plist */,
+				A5947F2510BBA797CC9CE217 /* NameDrop.metal */,
+				64B68CCA6047FE7ED08A133A /* Overlay.swift */,
+				B9A65A7B0975EEDAA8834F46 /* Preferences.swift */,
+				9C35A300E121792071312CBA /* ScreenDropApp.swift */,
+				6A0B5DB7C56DAAF6DDADAA64 /* SettingsView.swift */,
+			);
+			path = ScreenDrop;
+			sourceTree = "<group>";
+		};
+		9E1A1A635BECC5D4881AB6CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D5BAC3C80D64E309CB0E6F11 /* ScreenDrop.app */,
+				5B3902D36B4134AE054AF13F /* ScreenDropTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BAC54DC66FC37E37DB4A5FCB = {
+			isa = PBXGroup;
+			children = (
+				44F8DF1E7A50D3511120F0BD /* ScreenDrop */,
+				144B6CD2D9C02CE4D131960D /* ScreenDropTests */,
+				9E1A1A635BECC5D4881AB6CF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4DB0C033287A0A7940512318 /* ScreenDrop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5F88660186CB3AD2705FB60 /* Build configuration list for PBXNativeTarget "ScreenDrop" */;
+			buildPhases = (
+				B84CE33473AD3A3447E978D2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScreenDrop;
+			packageProductDependencies = (
+			);
+			productName = ScreenDrop;
+			productReference = D5BAC3C80D64E309CB0E6F11 /* ScreenDrop.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DFE074E7A88840AC277D3F09 /* ScreenDropTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96ADB8E13E93573140A2C123 /* Build configuration list for PBXNativeTarget "ScreenDropTests" */;
+			buildPhases = (
+				E8BD340386506359F6A1A0BB /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9CA549DE9CF48D9D6F1371FD /* PBXTargetDependency */,
+			);
+			name = ScreenDropTests;
+			packageProductDependencies = (
+			);
+			productName = ScreenDropTests;
+			productReference = 5B3902D36B4134AE054AF13F /* ScreenDropTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0C846C713AF85DE4D868E416 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					4DB0C033287A0A7940512318 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 819993BE71BCF77A9F9A0F64 /* Build configuration list for PBXProject "ScreenDrop" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = BAC54DC66FC37E37DB4A5FCB;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9E1A1A635BECC5D4881AB6CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4DB0C033287A0A7940512318 /* ScreenDrop */,
+				DFE074E7A88840AC277D3F09 /* ScreenDropTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B84CE33473AD3A3447E978D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48AF1A9D325B9CF54B84886E /* Capture.swift in Sources */,
+				C0439EA12AEDC523AD72DEC7 /* Coordinator.swift in Sources */,
+				92474D56D9C33B5B70E226C3 /* DropFrame.swift in Sources */,
+				68F18A40BDE765EB4047AD0C /* Geometry.swift in Sources */,
+				72298336B947E7FB89A22BCD /* NameDrop.metal in Sources */,
+				1A292D1798E5F27EC4E4E07A /* Overlay.swift in Sources */,
+				9F9A4F44871AB42A9E1473E2 /* Preferences.swift in Sources */,
+				BE6C4437F250D8935BEA5C11 /* ScreenDropApp.swift in Sources */,
+				993115668F195A81995B3096 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8BD340386506359F6A1A0BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E37996D43E3035F3BFFC150 /* GeometryTests.swift in Sources */,
+				5A0F44F793EF86EE43659174 /* RenderFrames.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9CA549DE9CF48D9D6F1371FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DB0C033287A0A7940512318 /* ScreenDrop */;
+			targetProxy = B193B7C369C67D25249C0D88 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3C0E5E39931A5CC93E376174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.3.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		4AE02FB8A6E400CC545DA3FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kutluhangil.ScreenDropTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScreenDrop.app/Contents/MacOS/ScreenDrop";
+			};
+			name = Debug;
+		};
+		5358CBC8448450B8B680DA53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kutluhangil.ScreenDropTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScreenDrop.app/Contents/MacOS/ScreenDrop";
+			};
+			name = Release;
+		};
+		A9A700D2E02974B992A64E80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ScreenDrop/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kutluhangil.ScreenDrop;
+				SDKROOT = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+			};
+			name = Debug;
+		};
+		C02F8DF13E5A9243D590438A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ScreenDrop/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kutluhangil.ScreenDrop;
+				SDKROOT = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+			};
+			name = Release;
+		};
+		D6343AA49F9F679655CDC1C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.3.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		819993BE71BCF77A9F9A0F64 /* Build configuration list for PBXProject "ScreenDrop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C0E5E39931A5CC93E376174 /* Debug */,
+				D6343AA49F9F679655CDC1C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		96ADB8E13E93573140A2C123 /* Build configuration list for PBXNativeTarget "ScreenDropTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AE02FB8A6E400CC545DA3FF /* Debug */,
+				5358CBC8448450B8B680DA53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B5F88660186CB3AD2705FB60 /* Build configuration list for PBXNativeTarget "ScreenDrop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9A700D2E02974B992A64E80 /* Debug */,
+				C02F8DF13E5A9243D590438A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0C846C713AF85DE4D868E416 /* Project object */;
+}
