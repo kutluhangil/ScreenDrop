@@ -5,6 +5,6 @@
 @media (prefers-reduced-motion:reduce){.glint{animation:none;transform:translateX(520px)}}
 </style>
 <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#4fc3ff" stop-opacity="0"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#7af0d2" stop-opacity="0"/></linearGradient></defs>
-<line x1="0" y1="12" x2="1200" y2="12" stroke="#20507a" stroke-opacity=".45" stroke-width="1"/>
+<line x1="0" y1="12" x2="1200" y2="12" stroke="#20507a" stroke-opacity=".35" stroke-width="1"/>
 <rect class="glint" x="0" y="10.5" width="160" height="3" rx="1.5" fill="url(#g)"/>
 </svg>
